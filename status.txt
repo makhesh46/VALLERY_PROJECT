@@ -1,0 +1,22 @@
+On branch main
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	deleted:    .env.example
+	deleted:    ce.txt
+	deleted:    ce2.txt
+	deleted:    cn.txt
+	deleted:    err-utf8.txt
+	deleted:    err.txt
+	deleted:    out-utf8.txt
+	deleted:    out.txt
+	deleted:    out2.txt
+	deleted:    version.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	push_err.txt
+	remote.txt
+	status.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
