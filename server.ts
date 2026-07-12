@@ -66,7 +66,9 @@ async function setupViteAndStart() {
   }
 }
 
-setupViteAndStart();
+if (process.env.VERCEL !== "1") {
+  setupViteAndStart();
+}
 
 // Export the app so Vercel's Serverless Functions can use it
 export default app;
