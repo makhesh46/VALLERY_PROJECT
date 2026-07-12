@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    
+
     res.json((products || []).map(formatProduct));
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
@@ -76,7 +76,7 @@ router.get('/:id', async (req, res) => {
       .single();
 
     if (error || !product) return res.status(404).json({ message: 'Product not found' });
-    
+
     res.json(formatProduct(product));
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
@@ -151,10 +151,10 @@ router.put('/:id', authenticateAdmin, upload.array('images', 10), async (req, re
     // Merge kept existing images with new uploaded images
     finalImageUrls = [...finalImageUrls, ...newImageUrls];
 
-    const updateData: any = { 
-      title: name, 
-      price: Number(price), 
-      description, 
+    const updateData: any = {
+      title: name,
+      price: Number(price),
+      description,
       is_published: isPublished === 'true',
       category: category || 'General',
       image_url: JSON.stringify(finalImageUrls)
@@ -168,7 +168,7 @@ router.put('/:id', authenticateAdmin, upload.array('images', 10), async (req, re
       .single();
 
     if (error || !product) return res.status(404).json({ message: 'Product not found' });
-    
+
     res.json(formatProduct(product));
   } catch (error) {
     console.error(error);

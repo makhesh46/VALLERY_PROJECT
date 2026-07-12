@@ -43,5 +43,9 @@ CREATE TABLE IF NOT EXISTS settings (
   hero_subtitle TEXT DEFAULT 'Bespoke Metal Craft',
   hero_title TEXT DEFAULT 'Where Metal Meets Mastery',
   hero_button TEXT DEFAULT 'Explore Collection',
+  website_description TEXT DEFAULT 'Crafting innovative agricultural machinery and smart farming solutions with uncompromising durability and precision engineering.',
+  atelier_address TEXT DEFAULT 'Kanniyakumari\nTamil Nadu\nIndia',
+  instagram_username TEXT DEFAULT '@vallery_studio.lab',
+  formspree_key TEXT DEFAULT '',
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );

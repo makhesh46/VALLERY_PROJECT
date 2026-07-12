@@ -36,6 +36,7 @@ router.post('/', async (req, res) => {
     // Fetch settings to get admin contact info
     const { data: settings } = await supabase.from('settings').select('*').limit(1).single();
     const adminEmail = settings?.admin_email || process.env.EMAIL_USER || 'admin@example.com';
+    const adminPhone = settings?.admin_phone || undefined;
     const formspreeKey = settings?.formspree_key || undefined;
 
     // Send notifications asynchronously
@@ -46,7 +47,7 @@ router.post('/', async (req, res) => {
       address,
       email,
       message,
-    }, adminEmail, formspreeKey);
+    }, adminEmail, formspreeKey, adminPhone);
 
     res.status(201).json({ message: 'Request submitted successfully' });
   } catch (error) {
@@ -70,6 +71,7 @@ router.get('/', authenticateAdmin, async (req, res) => {
       customerName: r.customer_name,
       phoneNumber: r.customer_phone,
       email: r.customer_email,
+      createdAt: r.created_at,
       _id: r.id,
       product: r.product ? {
         ...r.product,

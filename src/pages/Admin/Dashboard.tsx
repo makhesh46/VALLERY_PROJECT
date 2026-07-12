@@ -38,6 +38,7 @@ export default function Dashboard() {
     heroButton: settings?.heroButton || '',
     atelierAddress: settings?.atelierAddress || '',
     instagramUsername: settings?.instagramUsername || '',
+    websiteDescription: settings?.websiteDescription || '',
     formspreeKey: settings?.formspreeKey || ''
   });
 
@@ -56,6 +57,7 @@ export default function Dashboard() {
         heroButton: settings.heroButton || 'Explore Collection',
         atelierAddress: settings.atelierAddress || 'Kanniyakumari\nTamil Nadu\nIndia',
         instagramUsername: settings.instagramUsername || '@vallery_studio.lab',
+        websiteDescription: settings.websiteDescription || 'Crafting innovative agricultural machinery and smart farming solutions with uncompromising durability and precision engineering.',
         formspreeKey: settings.formspreeKey || ''
       }));
     }
@@ -173,6 +175,7 @@ export default function Dashboard() {
     formData.append('heroButton', settingsForm.heroButton);
     formData.append('atelierAddress', settingsForm.atelierAddress);
     formData.append('instagramUsername', settingsForm.instagramUsername);
+    formData.append('websiteDescription', settingsForm.websiteDescription);
     formData.append('formspreeKey', settingsForm.formspreeKey);
     if (settingsForm.logo) {
       formData.append('logo', settingsForm.logo);
@@ -344,7 +347,9 @@ export default function Dashboard() {
                         <div className="flex justify-between items-start mb-4">
                           <div>
                             <h3 className="text-xl font-serif text-white">{req.customerName}</h3>
-                            <p className="text-sm text-white/50">{new Date(req.createdAt).toLocaleString()}</p>
+                            <p className="text-sm text-white/50">
+                              {req.createdAt || req.created_at ? new Date(req.createdAt || req.created_at).toLocaleString() : 'No date available'}
+                            </p>
                           </div>
                           <select
                             value={req.status}
@@ -355,7 +360,7 @@ export default function Dashboard() {
                           >
                             <option value="pending">Pending</option>
                             <option value="contacted">Contacted</option>
-                            <option value="resolved">Resolved</option>
+                            <option value="completed">Resolved</option>
                           </select>
                         </div>
                         <div className="grid grid-cols-2 gap-4 text-sm text-white/70 mb-4">
@@ -393,6 +398,15 @@ export default function Dashboard() {
                       className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#c5a059]"
                       value={settingsForm.websiteTitle}
                       onChange={(e) => setSettingsForm({ ...settingsForm, websiteTitle: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-widest text-white/60 mb-2">Website Description / Footer Text</label>
+                    <textarea
+                      rows={3}
+                      className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#c5a059] resize-none"
+                      value={settingsForm.websiteDescription}
+                      onChange={(e) => setSettingsForm({ ...settingsForm, websiteDescription: e.target.value })}
                     />
                   </div>
                   <div>

@@ -15,10 +15,11 @@ router.get('/', async (req, res) => {
       // Return default if none found
       settings = {
         website_title: 'Metal Art & Product Design',
-        admin_email: 'avrevlab@gmail.com',
+        admin_email: process.env.DEFAULT_ADMIN_EMAIL || 'admin@example.com',
         admin_phone: '8807972934',
         atelier_address: 'Kanniyakumari\nTamil Nadu\nIndia',
         instagram_username: '@vallery_studio.lab',
+        website_description: 'Crafting innovative agricultural machinery and smart farming solutions with uncompromising durability and precision engineering.',
         formspree_key: ''
       };
     }
@@ -33,6 +34,7 @@ router.get('/', async (req, res) => {
       heroButton: settings.hero_button || 'Explore Collection',
       atelierAddress: settings.atelier_address || 'Kanniyakumari\nTamil Nadu\nIndia',
       instagramUsername: settings.instagram_username || '@vallery_studio.lab',
+      websiteDescription: settings.website_description || 'Crafting innovative agricultural machinery and smart farming solutions with uncompromising durability and precision engineering.',
       formspreeKey: settings.formspree_key || ''
     });
   } catch (error) {
@@ -43,7 +45,7 @@ router.get('/', async (req, res) => {
 // Update settings (admin)
 router.put('/', authenticateAdmin, upload.single('logo'), async (req: any, res) => {
   try {
-    const { websiteTitle, adminEmail, adminPhone, adminName, heroSubtitle, heroTitle, heroButton, atelierAddress, instagramUsername, formspreeKey } = req.body;
+    const { websiteTitle, adminEmail, adminPhone, adminName, heroSubtitle, heroTitle, heroButton, atelierAddress, instagramUsername, formspreeKey, websiteDescription } = req.body;
     
     let { data: settings } = await supabase.from('settings').select('*').limit(1).single();
     
@@ -57,6 +59,7 @@ router.put('/', authenticateAdmin, upload.single('logo'), async (req: any, res) 
     if (atelierAddress !== undefined) updateData.atelier_address = atelierAddress;
     if (instagramUsername !== undefined) updateData.instagram_username = instagramUsername;
     if (formspreeKey !== undefined) updateData.formspree_key = formspreeKey;
+    if (websiteDescription !== undefined) updateData.website_description = websiteDescription;
 
     if (req.file) {
       updateData.logo_url = await uploadToCloudinary(req.file.buffer);
@@ -114,6 +117,7 @@ router.put('/', authenticateAdmin, upload.single('logo'), async (req: any, res) 
       heroButton: settings?.hero_button || heroButton || 'Explore Collection',
       atelierAddress: settings?.atelier_address || atelierAddress || 'Kanniyakumari\nTamil Nadu\nIndia',
       instagramUsername: settings?.instagram_username || instagramUsername || '@vallery_studio.lab',
+      websiteDescription: settings?.website_description || websiteDescription || 'Crafting innovative agricultural machinery and smart farming solutions with uncompromising durability and precision engineering.',
       formspreeKey: settings?.formspree_key || formspreeKey || '',
       warning: updateError
     });

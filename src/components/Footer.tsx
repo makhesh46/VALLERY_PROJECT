@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-serif mb-4">{settings?.websiteTitle || 'METAL ART'}</h3>
             <p className="text-sm text-white/60 leading-relaxed">
-              Crafting innovative agricultural machinery and smart farming solutions with uncompromising durability and precision engineering.
+              {settings?.websiteDescription || 'Crafting innovative agricultural machinery and smart farming solutions with uncompromising durability and precision engineering.'}
             </p>
           </div>
           <div>
